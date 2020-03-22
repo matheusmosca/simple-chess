@@ -10,7 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^13.9.2",
+    "browserify": "^16.5.0",
     "gulp": "^4.0.2",
-    "typescript": "^3.8.3"
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.3",
+    "vinyl-source-stream": "^2.0.0"
   }
 }
