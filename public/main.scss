@@ -17,12 +17,14 @@ body {
     }
 }
 
-.square {
-    margin: 0;
-    padding: 0;
-    width: 110px;
-    height: 110px;
-    border: 1px solid wheat;
+.board {
+    div {
+        margin: 0;
+        padding: 0;
+        width: 110px;
+        height: 110px;
+        border: 1px solid wheat;
+    }
 }
 
 .light {

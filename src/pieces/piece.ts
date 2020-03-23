@@ -19,4 +19,8 @@ export class Piece implements IPiece {
         this.color = color;
         this.Moved = false;
     }
+
+    static typeOfPiece() {
+        return this;
+    }
 }
