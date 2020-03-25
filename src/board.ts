@@ -54,7 +54,14 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
                 divElement.classList.add('piece', piece, color);
               // If the element is null so this shouldn't appear  
             } else if (boardMatrix[i][j] === null && listOfDivs[e].classList.contains('piece')) {
-                // Removes the classes that make him appear
+                // !BUG here with King and Queen
+                // !fix:
+                // ?????????
+                listOfDivs[e].classList.contains('queen') ? listOfDivs[e].classList.remove('queen') : 0;
+                listOfDivs[e].classList.contains('black') ? listOfDivs[e].classList.remove('black') : 0;
+                listOfDivs[e].classList.contains('white') ? listOfDivs[e].classList.remove('white') : 0;
+                listOfDivs[e].classList.contains('king') ? listOfDivs[e].classList.remove('king') : 0;
+                // ?????????
                 listOfDivs[e].classList.forEach(n => {
                     if (n !== 'light' && n !== 'dark') {
                         listOfDivs[e].classList.remove(n);

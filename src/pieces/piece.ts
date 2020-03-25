@@ -1,4 +1,5 @@
-import { ICoordinate } from '../main'
+import { ICoordinate, board } from '../main'
+import { renderBoard, boardMatrix } from '../board';
 
 export enum Color {
     white = 'white',
@@ -26,11 +27,14 @@ export abstract class Piece implements IPiece {
         return;
     }
 
-    doMovement(board: Piece[][], { row, column }: ICoordinate) {
-        board[this.row][this.column] = null;
+    doMovement({ row, column }: ICoordinate) {
+        boardMatrix[this.row][this.column] = null;
         this.Moved = true;
         this.row = row;
         this.column = column
-        board[row][column] = this;
+        boardMatrix[row][column] = null;
+        renderBoard(boardMatrix, board);
+        boardMatrix[row][column] = this;
+        renderBoard(boardMatrix, board);
     }
 }
