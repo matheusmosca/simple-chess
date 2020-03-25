@@ -6,5 +6,4 @@ export class Knight extends Piece implements IPiece {
         super(row, column, color);
         this.Moved = false;
     }
-    
 }

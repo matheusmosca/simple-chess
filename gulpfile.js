@@ -1,29 +1,3 @@
-// const gulp = require('gulp');
-// const sass = require('gulp-sass');
-// const tp = require('gulp-typescript');
-
-// function style() {
-//     return gulp.src('./public/**/*.scss')
-//     .pipe(sass())
-//     .pipe(gulp.dest('./dist'));
-// }
-
-// function type() {
-//     return gulp.src('./src/**/*.ts')
-//     .pipe(tp())
-//     .pipe(gulp.dest('./dist/javascript'));
-// }
-
-// function watch() {
-//     gulp.watch('./src/**/*.ts', type);
-//     gulp.watch('./public/**/*.scss', style);
-// }
-
-// exports.type = type;
-// exports.style = style;
-// exports.start = gulp.series(type, style, watch);
-
-
 var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');

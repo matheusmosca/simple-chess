@@ -1,3 +1,5 @@
+import { ICoordinate } from '../main'
+
 export enum Color {
     white = 'white',
     black = 'black'
@@ -10,7 +12,7 @@ export interface IPiece {
     Moved: boolean
 }
 
-export class Piece implements IPiece {
+export abstract class Piece implements IPiece {
     public Moved: boolean;
 
     constructor(public row: number, public column:number, public color: Color) {
@@ -20,7 +22,15 @@ export class Piece implements IPiece {
         this.Moved = false;
     }
 
-    static typeOfPiece() {
-        return this;
+    possibleMovementsList(board: Piece[][]): ICoordinate[] {
+        return;
+    }
+
+    doMovement(board: Piece[][], { row, column }: ICoordinate) {
+        board[this.row][this.column] = null;
+        this.Moved = true;
+        this.row = row;
+        this.column = column
+        board[row][column] = this;
     }
 }
