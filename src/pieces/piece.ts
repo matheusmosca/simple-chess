@@ -1,10 +1,7 @@
-import { ICoordinate, board } from '../main'
+import { ICoordinate, board } from '../game';
 import { renderBoard, boardMatrix } from '../board';
 
-export enum Color {
-    white = 'white',
-    black = 'black'
-}
+export type Color = 'white' | 'black'
 
 export interface IPiece {
     row: number
@@ -28,19 +25,16 @@ export abstract class Piece implements IPiece {
     }
 
     doMovement({ row, column }: ICoordinate) {
-        // removeHTMLClass({ row, column });
-        // removeHTMLClass({ row: this.row, column: this.column });
         boardMatrix[this.row][this.column] = null;
         this.Moved = true;
         this.row = row;
         this.column = column
+
         boardMatrix[row][column] = null;
-
-        // removeHTMLClass({ row, column });
-        // removeHTMLClass({ row: this.row, column: this.column });
-
         renderBoard(boardMatrix, board);
+
         boardMatrix[row][column] = this;
+        boardMatrix[row][column].color = this.color;
         renderBoard(boardMatrix, board);
     }
 }

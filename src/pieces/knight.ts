@@ -1,6 +1,5 @@
 import { Piece, IPiece, Color } from './piece';
-import { ICoordinate } from '../main';
-// import { boardMatrix } from '../board';
+import { ICoordinate } from '../game';
 
 export class Knight extends Piece implements IPiece {
     

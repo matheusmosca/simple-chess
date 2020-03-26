@@ -1,5 +1,5 @@
 import { Piece, IPiece, Color } from './piece';
-import { ICoordinate } from '../main';
+import { ICoordinate } from '../game';
 import { boardMatrix } from '../board';
 
 export class Bishop extends Piece implements IPiece {
@@ -15,9 +15,13 @@ export class Bishop extends Piece implements IPiece {
         let j = this.column + 1;
 
         while (i < 8 && j < 8) {
-            if (board[i][j] === null || board[i][j].color !== this.color) {
+            if (board[i][j] === null) {
                 listOfCoordinates.push({ row: i, column: j });
-            } else if (board[i][i] !== null) {
+
+            } else if (board[i][j].color !== this.color) {
+                listOfCoordinates.push({ row: i, column: j });
+                break;
+            } else {
                 break;
             }
             i++;
@@ -27,11 +31,16 @@ export class Bishop extends Piece implements IPiece {
         j = this.column + 1;
         
         while (i >= 0 && j < 8) {
-            if (board[i][j] === null || board[i][j].color !== this.color) {
+            if (board[i][j] === null) {
                 listOfCoordinates.push({ row: i, column: j });
-            } else if (board[i][i] !== null) {
+
+            } else if (board[i][j].color !== this.color) {
+                listOfCoordinates.push({ row: i, column: j });
+                break;
+            } else {
                 break;
             } 
+
             i--;
             j++;
         }
@@ -40,9 +49,13 @@ export class Bishop extends Piece implements IPiece {
         j = this.column - 1;
         
         while (i < 8 && j >= 0) {
-            if (board[i][j] === null || board[i][j].color !== this.color) {
+            if (board[i][j] === null) {
                 listOfCoordinates.push({ row: i, column: j });
-            } else if (board[i][i] !== null) {
+
+            } else if (board[i][j].color !== this.color) {
+                listOfCoordinates.push({ row: i, column: j });
+                break;
+            } else {
                 break;
             }
             i++;
@@ -53,11 +66,16 @@ export class Bishop extends Piece implements IPiece {
         j = this.column - 1;
         
         while (i >= 0 && j >= 0) {
-            if (board[i][j] === null || board[i][j].color !== this.color) {
+            if (board[i][j] === null) {
                 listOfCoordinates.push({ row: i, column: j });
-            } else if (board[i][i] !== null) {
+
+            } else if (board[i][j].color !== this.color) {
+                listOfCoordinates.push({ row: i, column: j });
+                break;
+            } else {
                 break;
             }
+
             i--;
             j--;
         }

@@ -1,5 +1,5 @@
 import { Piece, IPiece, Color } from './piece';
-import { ICoordinate } from '../main'
+import { ICoordinate } from '../game'
 
 export class Pawn extends Piece implements IPiece {
     
