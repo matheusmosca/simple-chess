@@ -28,11 +28,17 @@ export abstract class Piece implements IPiece {
     }
 
     doMovement({ row, column }: ICoordinate) {
+        // removeHTMLClass({ row, column });
+        // removeHTMLClass({ row: this.row, column: this.column });
         boardMatrix[this.row][this.column] = null;
         this.Moved = true;
         this.row = row;
         this.column = column
         boardMatrix[row][column] = null;
+
+        // removeHTMLClass({ row, column });
+        // removeHTMLClass({ row: this.row, column: this.column });
+
         renderBoard(boardMatrix, board);
         boardMatrix[row][column] = this;
         renderBoard(boardMatrix, board);

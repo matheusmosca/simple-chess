@@ -58,6 +58,7 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
                 // !fix:
                 // ?????????
                 listOfDivs[e].classList.contains('queen') ? listOfDivs[e].classList.remove('queen') : 0;
+                listOfDivs[e].classList.contains('pawn') ? listOfDivs[e].classList.remove('pawn') : 0;
                 listOfDivs[e].classList.contains('black') ? listOfDivs[e].classList.remove('black') : 0;
                 listOfDivs[e].classList.contains('white') ? listOfDivs[e].classList.remove('white') : 0;
                 listOfDivs[e].classList.contains('king') ? listOfDivs[e].classList.remove('king') : 0;
