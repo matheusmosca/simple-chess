@@ -7,7 +7,7 @@ var paths = {
     pages: ['./public/*.html']
 };
 
-function copyHtml() {
+function copyHTML() {
     return gulp.src(paths.pages)
     .pipe(gulp.dest('dist/'));
 }
@@ -33,12 +33,12 @@ function style() {
 }
 
 function watch() {
-    gulp.watch('./src/**/*.ts', gulp.series(copyHtml, bundle));
-    gulp.watch('./public/**/*.html', gulp.series(copyHtml, bundle));
+    gulp.watch('./src/**/*.ts', gulp.series(copyHTML, bundle));
+    gulp.watch('./public/**/*.html', gulp.series(copyHTML, bundle));
     gulp.watch('./public/**/*.scss', style);
 }
 
-exports.bundle = bundle;
-exports.copyHtml = copyHtml;
+exports.bundle = gulp.parallel(bundle, copyHTML, style);
+exports.copyHTML = copyHTML;
 exports.style = style;
-exports.watch = gulp.series(copyHtml, style, bundle, watch);
+exports.watch = gulp.series(copyHTML, style, bundle, watch);
