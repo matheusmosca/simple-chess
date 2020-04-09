@@ -31,15 +31,17 @@ export class Pawn extends Piece implements IPiece {
             }
         }
 
+        //* left diagonal movement
         if (this.row + mov < 8 && this.row + mov >= 0 && this.column - 1 >= 0) {
-            if (board[this.row + mov][this.column - 1] === null || board[this.row + mov][this.column - 1].color !== this.color) {
+            if (board[this.row + mov][this.column - 1] !== null && board[this.row + mov][this.column - 1].color !== this.color) {
                 listOfCoordinates.push({ row: this.row + mov, column: this.column - 1 });
             }
 
         }
 
+        //* right diagonal movement
         if (this.row + mov < 8 && this.row + mov >= 0 && this.column + 1 < 8) {
-            if (board[this.row + mov][this.column + 1] === null || board[this.row + mov][this.column + 1].color !== this.color) {
+            if (board[this.row + mov][this.column + 1] !== null && board[this.row + mov][this.column + 1].color !== this.color) {
                 listOfCoordinates.push({ row: this.row + mov, column: this.column + 1 });
             }
 

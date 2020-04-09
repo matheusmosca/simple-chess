@@ -4,13 +4,19 @@ var source = require('vinyl-source-stream');
 var tsify = require('tsify');
 var sass = require('gulp-sass');
 var paths = {
-    pages: ['./public/*.html']
+    pages: ['./public/*.html', './public/**/images/*.svg']
 };
 
 function copyHTML() {
-    return gulp.src(paths.pages)
+    return gulp.src(paths.pages[0])
     .pipe(gulp.dest('dist/'));
 }
+
+function copyImages() {
+    return gulp.src(paths.pages[1])
+    .pipe(gulp.dest('dist/'));
+}
+
 
 function bundle() {
     return browserify({
@@ -38,7 +44,9 @@ function watch() {
     gulp.watch('./public/**/*.scss', style);
 }
 
-exports.bundle = gulp.parallel(bundle, copyHTML, style);
+
+exports.copyImages = copyImages;
+exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
 exports.copyHTML = copyHTML;
 exports.style = style;
-exports.watch = gulp.series(copyHTML, style, bundle, watch);
+exports.watch = gulp.series(copyHTML, style, bundle, copyImages, watch);
