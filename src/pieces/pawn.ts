@@ -7,14 +7,14 @@ export class Pawn extends Piece implements IPiece {
         super(row, column, color);
         this.Moved = false;
     }
-    // Return an array with the availables movements
+    //* Return an array with the availables movements
     public possibleMovementsList(board: Piece[][]): ICoordinate[] {
         const listOfCoordinates: ICoordinate[] = [];
         const color = this.color;
         const mov = (color == 'white') ? 1 : -1;
 
         if (this.row + mov < 8 && this.row + mov >= 0) {
-            // movement 2 rows up
+            //* movement 2 rows up
             if (!this.Moved) {
                 
                 if (this.row + 2*mov < 8 && this.row + 2*mov >= 0) {

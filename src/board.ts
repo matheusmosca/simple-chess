@@ -1,10 +1,11 @@
-import { Piece } from './pieces/piece'
+import { Piece, Color } from './pieces/piece'
 import { Pawn } from './pieces/pawn'
 import { Rook } from './pieces/rook'
 import { Knight } from './pieces/knight'
 import { Bishop } from './pieces/bishop'
 import { Queen } from './pieces/queen'
 import { King } from './pieces/king'
+import { ICoordinate } from './game'
 
 var boardMatrix: Piece[][] = [[], [], [], [], [], [], [], []];
 
@@ -71,8 +72,28 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
     }
 }
 
+export interface IPieceType {
+  pieceType: string
+  color: Color
+}
+
+// TODO resolve this   
+function pickPiece({ row, column }: ICoordinate): IPieceType {
+  //TODO pick a piece in the boardMatrix
+  if (row >= 8 || row < 0 || column >= 8 || column < 0) {
+    return { pieceType: null, color: null };
+  } else if (boardMatrix[row][column] === null) {
+    return { pieceType: null, color: null };
+  }
+  const pieceType = boardMatrix[row][column].constructor["name"].toLowerCase();
+  const color = boardMatrix[row][column].color;
+  
+  return { pieceType, color }
+}
+
 export {
     boardMatrix,
     initializePieces,
-    renderBoard
+    renderBoard,
+    pickPiece,
 }

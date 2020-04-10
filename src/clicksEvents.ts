@@ -1,6 +1,7 @@
 import { IPieceDTO, ICoordinate, tryMovement, changePlayer } from "./game";
 import { Color } from './pieces/piece';
 import { boardMatrix } from "./board";
+import { isInCheck } from "./check";
 
 let playerColor: Color = 'white'; 
 let hasClickedAPiece = false;
@@ -20,6 +21,7 @@ export function firstClick(target: EventTarget): boolean {
   if (!hasClickedAPiece) {
     const { coord, pieceInstance } = findPiecePosition((target as HTMLDivElement));
     firstPieceDTO = { coord, pieceInstance };
+    console.log(isInCheck(coord, playerColor));
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
       console.log(pieceInstance.color);
