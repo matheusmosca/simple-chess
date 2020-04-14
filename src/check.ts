@@ -2,6 +2,16 @@ import { ICoordinate } from "./game";
 import { Color, Piece } from "./pieces/piece";
 import { pickPiece, IPieceType } from "./board";
 
+export function checkHouses(listOfHouses: ICoordinate[], playerColor: Color, matrix: Piece[][]): boolean {
+  let bool: boolean = true;
+  listOfHouses.forEach(coord => {
+    if (isInCheck(coord, playerColor, matrix)) {
+      bool = false;
+    }
+  });
+  return bool;
+}
+
 export function isInCheck({ row, column }: ICoordinate, color: Color, matrix: Piece[][]): boolean {
   let checkBoolean: boolean = false;
   //* Pawn check

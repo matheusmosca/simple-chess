@@ -23,7 +23,7 @@ export function checkEndGame(playerColor: Color, matrix: Piece[][]): boolean {
 
   // No possible movements and king in check (Checkmate)
   if (bool && kingChecked) {
-    alert(`CheckMate! ${changePlayer(playerColor)} wins!!!`);
+    alert(`Checkmate! ${changePlayer(playerColor)} wins!!!`);
   // No possible movements and king is not in check (Stalemate)  
   } else if (bool && !kingChecked) {
     alert("StaleMate! It's a Draw!!");

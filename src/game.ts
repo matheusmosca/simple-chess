@@ -15,7 +15,6 @@ export interface IPieceDTO {
 }
 
 export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, playerColor: Color): Boolean {
-  // const list = pieceInstance.possibleMovementsList(boardMatrix);
   const list = checkingMovements(pieceInstance);
   console.table(list);
   let check: boolean = false;
@@ -25,10 +24,26 @@ export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, 
       check = true
     }
   });
-  // If check is true so make the movement
-  if (!!check) {
+  
+  let checkRock: boolean = false;
+  if (pieceInstance.constructor["name"].toLowerCase() === 'king') {
+    const castlingList = pieceInstance.avaiableCastling(boardMatrix);
+    castlingList.forEach(e => {
+      if (e.row === coord.row && e.column === coord.column) {
+        checkRock = true;
+      }
+    });
+  }  
+  
+  if (!!checkRock) {
+    pieceInstance.doCastling(coord, boardMatrix);
+    renderBoard(boardMatrix, board);
+
+    return true
+  } else if (!!check) {
     pieceInstance.doMovement(coord, boardMatrix);
     renderBoard(boardMatrix, board);
+    
     return true
   }
 }

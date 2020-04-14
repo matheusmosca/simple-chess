@@ -67,5 +67,13 @@ export abstract class Piece implements IPiece {
 
       return bool;
     }  
+
+    avaiableCastling(board: Piece[][]): ICoordinate[] {
+      return [];
+    }
+
+    doCastling({ row, column }: ICoordinate, matrix: Piece[][]) {
+
+    }
       
 }
