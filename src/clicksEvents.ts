@@ -3,7 +3,7 @@ import { Color } from './pieces/piece';
 import { boardMatrix } from "./board";
 import { isInCheck } from "./check";
 
-let playerColor: Color = 'white'; 
+export let playerColor: Color = 'white'; 
 let hasClickedAPiece = false;
 let firstPieceDTO: IPieceDTO;
 let secondPieceDTO: IPieceDTO;
@@ -21,7 +21,7 @@ export function firstClick(target: EventTarget): boolean {
   if (!hasClickedAPiece) {
     const { coord, pieceInstance } = findPiecePosition((target as HTMLDivElement));
     firstPieceDTO = { coord, pieceInstance };
-    console.log(isInCheck(coord, playerColor));
+    // console.log(isInCheck(coord, playerColor));
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
       console.log(pieceInstance.color);
@@ -38,7 +38,7 @@ export function secondClick(target: EventTarget) {
       hasClickedAPiece = false;
       firstClick(target);
     } else {
-      const sucess = tryMovement(firstPieceDTO, secondPieceDTO);
+      const sucess = tryMovement(firstPieceDTO, secondPieceDTO, playerColor);
       hasClickedAPiece = false;
       if (sucess) {
         playerColor = changePlayer(playerColor);

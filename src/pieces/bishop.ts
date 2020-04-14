@@ -80,8 +80,6 @@ export class Bishop extends Piece implements IPiece {
             j--;
         }
 
-        console.log(listOfCoordinates);
-        
         return listOfCoordinates;
     }
 }

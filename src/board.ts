@@ -77,16 +77,14 @@ export interface IPieceType {
   color: Color
 }
 
-// TODO resolve this   
-function pickPiece({ row, column }: ICoordinate): IPieceType {
-  //TODO pick a piece in the boardMatrix
+function pickPiece({ row, column }: ICoordinate, matrix: Piece[][]): IPieceType {
   if (row >= 8 || row < 0 || column >= 8 || column < 0) {
     return { pieceType: null, color: null };
-  } else if (boardMatrix[row][column] === null) {
+  } else if (matrix[row][column] === null) {
     return { pieceType: null, color: null };
   }
-  const pieceType = boardMatrix[row][column].constructor["name"].toLowerCase();
-  const color = boardMatrix[row][column].color;
+  const pieceType = matrix[row][column].constructor["name"].toLowerCase();
+  const color = matrix[row][column].color;
   
   return { pieceType, color }
 }
