@@ -25,27 +25,23 @@ export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, 
     }
   });
   
-  let checkRock: boolean = false;
-  if (pieceInstance.constructor["name"].toLowerCase() === 'king') {
-    const castlingList = pieceInstance.avaiableCastling(boardMatrix);
-    castlingList.forEach(e => {
-      if (e.row === coord.row && e.column === coord.column) {
-        checkRock = true;
-      }
-    });
-  }  
-  
-  if (!!checkRock) {
-    pieceInstance.doCastling(coord, boardMatrix);
-    renderBoard(boardMatrix, board);
+  let checkEspecialMovements = especialMovements(pieceInstance, coord);
 
-    return true
-  } else if (!!check) {
+  if (!checkEspecialMovements && !!check) {
+    if (pieceInstance.constructor["name"].toLowerCase() === 'pawn') {
+      console.log(pieceInstance.doubleMovementTurn);
+      if (Math.abs(coord.row - pieceInstance.row) === 2) {
+        pieceInstance.doubleMovementTurn = Piece.turn;
+      }
+    }
     pieceInstance.doMovement(coord, boardMatrix);
     renderBoard(boardMatrix, board);
     
     return true
+  } else if (!!checkEspecialMovements) {
+    return true;
   }
+  return false
 }
 
 export function changePlayer(playerColor: Color): Color {
@@ -77,6 +73,31 @@ export function findKingCoord(playerColor: Color): ICoordinate {
     });
   });
   return kingCoord;
+}
+
+function especialMovements(pieceInstance: Piece, coord: ICoordinate): boolean {
+  let bool: boolean = false;
+  if (pieceInstance.constructor["name"].toLowerCase() === 'king') {
+    const castlingList = pieceInstance.avaiableCastling(boardMatrix);
+    castlingList.forEach(e => {
+      if (e.row === coord.row && e.column === coord.column) {
+        pieceInstance.doCastling(coord, boardMatrix);
+        renderBoard(boardMatrix, board);
+        bool = true;
+      }
+    });
+  } else if (pieceInstance.constructor["name"].toLowerCase() === 'pawn') {
+
+    const { row, column } = pieceInstance.enPassant(boardMatrix);
+    if (row === coord.row && column === coord.column ) {
+
+      pieceInstance.doEnpassant(coord, boardMatrix);
+      renderBoard(boardMatrix, board);
+    
+      return true;
+    }
+  }
+  return bool;
 }
 
 export function checkingMovements(pieceInstance: Piece): ICoordinate[] {

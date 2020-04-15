@@ -9,10 +9,14 @@ export interface IPiece {
     column: number
     color: Color
     Moved: boolean
+    doubleMovementTurn: number
 }
 
 export abstract class Piece implements IPiece {
     public Moved: boolean;
+    static turn: number = 1; 
+    public doubleMovementTurn: number = -1;    
+
 
     constructor(public row: number, public column:number, public color: Color) {
         this.row = row;
@@ -37,6 +41,7 @@ export abstract class Piece implements IPiece {
         matrix[row][column] = this;
         matrix[row][column].color = this.color;
         renderBoard(matrix, board);
+        Piece.turn++;
       }
 
     fakeMovement({ row, column }: ICoordinate, matrix: Piece[][]): boolean {
@@ -74,6 +79,13 @@ export abstract class Piece implements IPiece {
 
     doCastling({ row, column }: ICoordinate, matrix: Piece[][]) {
 
+    }
+
+    enPassant(matrix: Piece[][]): ICoordinate {
+      return
+    }  
+
+    doEnpassant({ row, column }: ICoordinate, matrix: Piece[][]) {
     }
       
 }

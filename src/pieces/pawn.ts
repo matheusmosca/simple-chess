@@ -1,8 +1,8 @@
 import { Piece, IPiece, Color } from './piece';
-import { ICoordinate } from '../game'
+import { ICoordinate, board } from '../game'
+import { renderBoard } from '../board';
 
 export class Pawn extends Piece implements IPiece {
-    
     constructor(row: number, column: number, color: Color) {
         super(row, column, color);
         this.Moved = false;
@@ -46,7 +46,58 @@ export class Pawn extends Piece implements IPiece {
             }
 
         }
+        //!
+        //* En passant
+        // if (this.column - 1 >= 0) {
+        //   const pawn1 = board[this.row][this.column - 1];
+        //   if (pawn1 !== null && pawn1.constructor["name"].toLowerCase() === 'pawn' && pawn1.color !== this.color) {
+        //     if (Math.abs(pawn1.doubleMovementTurn - Piece.turn) === 1) {
+        //       listOfCoordinates.push({ row: this.row + mov, column: pawn1.column });
+        //     }
+        //   }  
+        // }
+        // if (this.column + 1 < 8) {
+        //   const pawn2 = board[this.row][this.column + 1]; 
+        //   if (pawn2 !== null && pawn2.constructor["name"].toLowerCase() === 'pawn' && pawn2.color !== this.color) {
+        //     if (Math.abs(pawn2.doubleMovementTurn - Piece.turn) === 1) {
+        //       listOfCoordinates.push({ row: this.row + mov, column: pawn2.column });
+        //     }
+        // }
+
+        // }
         return listOfCoordinates;
     }
 
+    enPassant(matrix: Piece[][]): ICoordinate {
+      const mov = (this.color == 'white') ? 1 : -1;
+
+      if (this.column - 1 >= 0) {
+        const pawn1 = matrix[this.row][this.column - 1];
+        if (pawn1 !== null && pawn1.constructor["name"].toLowerCase() === 'pawn' && pawn1.color !== this.color) {
+          if (Math.abs(pawn1.doubleMovementTurn - Piece.turn) === 1) {
+            return { row: this.row + mov, column: pawn1.column };
+          }
+        }  
+      }
+      if (this.column + 1 < 8) {
+        const pawn2 = matrix[this.row][this.column + 1]; 
+        if (pawn2 !== null && pawn2.constructor["name"].toLowerCase() === 'pawn' && pawn2.color !== this.color) {
+          if (Math.abs(pawn2.doubleMovementTurn - Piece.turn) === 1) {
+            return { row: this.row + mov, column: pawn2.column };
+          }
+        }
+      }
+
+      return { row: null, column: null };
+    }  
+
+    doEnpassant({ row, column }: ICoordinate, matrix: Piece[][]) {
+      matrix[this.row][column] = null;
+      matrix[this.row][this.column] = null;
+      this.row = row;
+      this.column = column;
+      this.Moved = true;
+      matrix[row][column] = this;
+      renderBoard(matrix, board);
+    }
 }

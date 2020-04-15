@@ -130,13 +130,10 @@ export class King extends Piece implements IPiece {
         matrix[this.row][this.column] = null;
         this.row = row;
         this.column = column;
-        // renderBoard(matrix, board);
         matrix[row][column] = this;
-        // renderBoard(matrix, board);
         matrix[row][5] = matrix[row][7];
         
         matrix[row][7] = null;
-        // renderBoard(matrix, board);
         matrix[row][5].Moved = true;
         matrix[row][5].row = row;
         matrix[row][5].column = 5;
@@ -146,13 +143,10 @@ export class King extends Piece implements IPiece {
         matrix[this.row][this.column] = null;
         this.row = row;
         this.column = column;
-        // renderBoard(matrix, board);
         matrix[row][column] = this;
         matrix[row][3] = matrix[row][0];
-        // renderBoard(matrix, board);
         
         matrix[row][0] = null;
-        // renderBoard(matrix, board);
         matrix[row][3].Moved = true;
         matrix[row][3].row = row;
         matrix[row][3].column = 3;
