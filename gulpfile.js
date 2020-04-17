@@ -4,7 +4,7 @@ var source = require('vinyl-source-stream');
 var tsify = require('tsify');
 var sass = require('gulp-sass');
 var paths = {
-    pages: ['./public/*.html', './public/**/images/*.svg']
+    pages: ['./public/*.html', './public/**/images/**']
 };
 
 function copyHTML() {
