@@ -8,11 +8,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100vh;
 
   .board {
     background-image: url('./images/wood4.jpg');
     background-size: cover;
-    margin: 2em;
     width: 880px;
     height: 100%;
     display: grid;
