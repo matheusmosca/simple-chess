@@ -3,7 +3,9 @@ import { playerMovement, board, findKingCoord } from './game';
 import { playerColor } from './clicksEvents';
 import { isInCheck } from './check';
 import { checkEndGame } from "./endgame";
+import { calculateBoardSize } from "./boardSizeCalc";
 
+calculateBoardSize();
 initializePieces(boardMatrix);
 renderBoard(boardMatrix, board);
 

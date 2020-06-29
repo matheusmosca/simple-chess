@@ -8,14 +8,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 
   .board {
     background-image: url('./images/wood4.jpg');
     background-size: cover;
-    width: 880px;
-    height: 100%;
     display: grid;
     justify-content: center;
     align-items: center;
@@ -26,8 +24,8 @@ body {
       align-items: center;
       justify-content: center;
       margin: 0;
-      width: 110px;
-      height: 110px;
+      width: 100%;
+      height: 100%;
     }
     
   }
