@@ -57,3 +57,14 @@
     background-image: url('./images/bK.svg');
     background-size: cover;
 }
+
+.white {
+    &:hover {
+        cursor: pointer;
+    }
+}
+.black {
+    &:hover {
+        cursor: pointer;
+    }
+}
