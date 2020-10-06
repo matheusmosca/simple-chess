@@ -1,8 +1,66 @@
-# TypeScript Chess game
+<h1 align="center">Simple chess</h1>
 
-This application is a simple chess game using only TypeScript, HTML and SASS. In this project, i was able to start learning TypeScript without the help of any javascript framework like Agular.js or Vue.js. This application has been deployed via netlify and you can see [here](https://moscachess.netlify.app/)
-
-## Features 
-This game has almost all the features that a real chess game has. Except for the Pawn promotion, all the others special rules such as castling, en passant, check, checkmate and stalemate are included in the game
+👉 [View Live](http://knboard.com/)
 
 ![](./public/images/chess.gif)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+## Built using
+- Typescript
+- HTML & SASS
+- Gulp
+
+## To-do ✨
+
+- [X] Movements
+  - [X] Pawn
+  - [X] Bishop
+  - [X] Knight
+  - [X] Rook
+  - [X] Queen
+  - [X] King
+- [ ] Special events
+  - [X] Check validation
+  - [X] Checkmate
+  - [X] Stalemate
+  - [X] Castling
+  - [X] En passant
+  - [ ] Pawn promotion
+  - [ ] Draw cases (Only stalemate was implemented)
+- [ ] Misc
+  - [ ] Change the square style of available movements when clicking a piece
+  - [ ] Nice style
+  - [ ] Add clock time for both players
+  - [ ] Shows which player moves next
+  - [ ] allow undo movements
+  - [ ] Sound effects when make moves
+  - [ ] Create a logo (svg)
+  - [ ] Prettier & eslint config
+  
+## Development setup 🛠
+
+- [Node.js and npm](https://nodejs.org) installed (LTS)
+```sh
+cd directory-name
+
+# Install dependencies
+npm install
+
+# You'll need gulp-cli installed
+npm i gulp-cli-g
+
+# Start gulp and create dist folder if it doesn't exist
+gulp watch
+```
+
+Now, go to dist/index.html and open it on your browser
+
+## License
+
+Licensed under the MIT license.
+
+---
+
+👉 [View Live](http://knboard.com/)
