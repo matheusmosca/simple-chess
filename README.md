@@ -1,6 +1,6 @@
 <h1 align="center">Simple chess</h1>
 
-👉 [View Live](http://knboard.com/)
+👉 [View Live](https://simplechess.netlify.app/)
 
 ![](./public/images/chess.gif)
 
@@ -63,4 +63,4 @@ Licensed under the MIT license.
 
 ---
 
-👉 [View Live](http://knboard.com/)
+👉 [View Live](https://simplechess.netlify.app/)
