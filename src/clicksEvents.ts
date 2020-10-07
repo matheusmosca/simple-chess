@@ -5,6 +5,8 @@ import { isInCheck } from "./check";
 
 export let playerColor: Color = 'white'; 
 let hasClickedAPiece = false;
+// this will be a reference to the 
+let selectedElement: null | HTMLDivElement = null;
 let firstPieceDTO: IPieceDTO;
 let secondPieceDTO: IPieceDTO;
 
@@ -25,10 +27,21 @@ export function firstClick(target: EventTarget): boolean {
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
       console.log(pieceInstance.color);
+      selectedElement = target as HTMLDivElement;
+      selectedElement.classList.toggle("selected")
+      // (target as HTMLDivElement).classList.toggle("selected")
+      console.log(selectedElement)
       return true
     }
   }
-  return false
+  
+  else {
+    selectedElement?.classList.remove("selected")
+
+
+    return false
+  }
+
 }
 
 export function secondClick(target: EventTarget) {
