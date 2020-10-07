@@ -10,7 +10,7 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
-
+  
   .board {
     background-image: url('./images/wood4.jpg');
     background-size: cover;
@@ -30,4 +30,12 @@ body {
     
   }
 
+}
+
+.turnWhite:hover {
+  cursor: url('./images/whitehand.png'), auto;
+}
+
+.turnBlack:hover {
+  cursor: url('./images/blackhand.png'), auto;
 }

@@ -70,6 +70,7 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
             e++;
         }
     }
+    document.body.classList.add("turnWhite");
 }
 
 export interface IPieceType {

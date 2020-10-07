@@ -45,10 +45,15 @@ export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, 
 }
 
 export function changePlayer(playerColor: Color): Color {
+  var body = document.body;
   if (playerColor === 'white') {
-    return 'black'
+    body.classList.remove("turnWhite");
+    body.classList.add("turnBlack");
+    return 'black';
   } else {
-    return 'white'
+    body.classList.remove("turnBlack");
+    body.classList.add("turnWhite");
+    return 'white';
   }
 }
 
