@@ -6,18 +6,18 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
 
   .board {
-    background-image: url('./images/wood4.jpg');
-    background-size: cover;
     display: grid;
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(8, 1fr);
+    z-index: 0;
 
     div {
       display: flex;
@@ -27,7 +27,78 @@ body {
       width: 100%;
       height: 100%;
     }
+
+    /*
+    * Board may no longer use that 2Mb size image.
+    * I replaced that for 2 tiny tiles (white and dark)
+    * of 14kb size created before content in each div
+    * and set background of each one white or dark
+    */
+
+    .dark, .light {
+      &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-size: cover;
+        z-index: -1;
+      }
+    }
     
+    .dark {
+      &:before {
+        background-image: url('./images/dark.png');
+      }
+    }
+
+    .light {
+      &:before {
+        background-image: url('./images/white.png');
+      }
+    }
+  }
+}
+
+
+body > header {
+  display: block;
+  width: 100%;
+}
+
+.info {
+  background-color: #b93df2;
+  min-height: 4rem;
+  width: 35%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.124);
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 
+  .info__color, .info__timer {
+    font-size: 1.18rem;
+    padding: 1.18rem;
+    color: #f2f2f2;
+    font-weight: bold;
+    position: relative;
+  }
+
+  .info__color {
+    &:before {
+      content: 'Player';
+      color: #333;
+      font-size: 0.9rem;
+      position: absolute;
+      top: 5px;
+      left: -5px;
+    }
+  }
 }

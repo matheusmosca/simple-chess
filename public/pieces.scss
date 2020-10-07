@@ -58,12 +58,7 @@
     background-size: cover;
 }
 
-.white {
-    &:hover {
-        cursor: pointer;
-    }
-}
-.black {
+.white, .black {
     &:hover {
         cursor: pointer;
     }
