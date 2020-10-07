@@ -3,6 +3,8 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
 var sass = require('gulp-sass');
+var webserver = require('gulp-webserver');
+
 var paths = {
     pages: ['./public/*.html', './public/**/images/**']
 };
@@ -44,9 +46,17 @@ function watch() {
     gulp.watch('./public/**/*.scss', style);
 }
 
+function livebrowser() {
+    gulp.src('dist/').pipe(webserver({
+        livereload: true,
+        open: "index.html"
+    }));
+}
+
 
 exports.copyImages = copyImages;
 exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
 exports.copyHTML = copyHTML;
 exports.style = style;
 exports.watch = gulp.series(copyHTML, style, bundle, copyImages, watch);
+exports.live = livebrowser;
