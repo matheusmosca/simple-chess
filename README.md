@@ -49,7 +49,7 @@ cd directory-name
 npm install
 
 # You'll need gulp-cli installed
-npm i gulp-cli-g
+npm i gulp-cli -g
 
 # Start gulp and create dist folder if it doesn't exist
 gulp watch
