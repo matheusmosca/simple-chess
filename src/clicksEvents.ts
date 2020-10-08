@@ -42,8 +42,6 @@ export function secondClick(target: EventTarget) {
       hasClickedAPiece = false;
       if (sucess) {
         playerColor = changePlayer(playerColor);
-        const flexContainerMove = document.querySelector('#next-move') as HTMLElement;
-        flexContainerMove.innerHTML = "Move: "+ playerColor[0].toUpperCase() + playerColor.slice(1);
       }
     }
   }

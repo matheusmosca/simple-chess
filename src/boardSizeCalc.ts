@@ -6,8 +6,4 @@ export function calculateBoardSize() {
     const boardElement = document.querySelector('.board') as HTMLElement;
     boardElement.style.width = `${boardSide}px`;
     boardElement.style.height = `${boardSide}px`;
-
-    const flexContainer = document.querySelector('.flex-container') as HTMLElement;
-    flexContainer.style.width = `${boardSide}px`;
-    flexContainer.style.height = `${boardSide/12}px`;
 }

@@ -4,17 +4,8 @@
     padding: 0;
 }
 
-.flex-container {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.flex-container > div {
-  font-size: 25px;
-}
-
 body {
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
