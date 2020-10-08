@@ -46,8 +46,12 @@ export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, 
 
 export function changePlayer(playerColor: Color): Color {
   if (playerColor === 'white') {
+    document.getElementById('turn').textContent = "Black's turn :";
+    document.getElementById('turn').style.top="25px"
     return 'black'
   } else {
+    document.getElementById('turn').textContent = "White's turn :";
+    document.getElementById('turn').style.top="500px"
     return 'white'
   }
 }
