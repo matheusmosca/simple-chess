@@ -4,6 +4,20 @@
     padding: 0;
 }
 
+.last-pick{
+  background:rgba(205, 210, 106,0.8);
+  overflow: hidden;
+  height: 100%;
+  z-index: 2;
+}
+
+.last-drop{
+  background:rgba(205, 210, 106,0.9);
+  overflow: hidden;
+  height: 100%;
+  z-index: 2;
+}
+
 body {
   display: flex;
   justify-content: center;

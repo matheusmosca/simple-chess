@@ -60,7 +60,7 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
                 listOfDivs[e].classList.contains('white') ? listOfDivs[e].classList.remove('white') : 0;
 
                 listOfDivs[e].classList.forEach(n => {
-                    if (n !== 'light' && n !== 'dark') {
+                    if (n !== 'light' && n !== 'dark' && n !== 'last-pick' && n !== 'last-drop' ) {
                         listOfDivs[e].classList.remove(n);
                     } 
                 });

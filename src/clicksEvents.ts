@@ -13,8 +13,19 @@ export function findPiecePosition(target: HTMLDivElement): IPieceDTO {
   const column: number = parseInt((target as HTMLDivElement).getAttribute('column'));
   const coord: ICoordinate = { row, column }; 
   const pieceInstance = boardMatrix[row][column];
-  
+
   return { coord, pieceInstance };
+}
+
+export function resetPickDropClass(target: HTMLElement, pick: boolean = true, drop: boolean = true) {
+  if (drop) {
+    target.parentElement.querySelectorAll( ".last-drop" ).forEach( e =>
+      e.classList.remove( "last-drop" ) );
+  }
+  if (pick) {
+    target.parentElement.querySelectorAll( ".last-pick" ).forEach( e =>
+      e.classList.remove( "last-pick" ) );
+  }
 }
 
 export function firstClick(target: EventTarget): boolean {
@@ -25,6 +36,9 @@ export function firstClick(target: EventTarget): boolean {
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
       console.log(pieceInstance.color);
+      var targetElement = target as HTMLElement;
+      resetPickDropClass(targetElement);
+      targetElement.classList.add("last-pick");
       return true
     }
   }
@@ -41,6 +55,9 @@ export function secondClick(target: EventTarget) {
       const sucess = tryMovement(firstPieceDTO, secondPieceDTO, playerColor);
       hasClickedAPiece = false;
       if (sucess) {
+        var targetElement = target as HTMLElement;
+        resetPickDropClass(targetElement,false,true);
+        targetElement.classList.add("last-drop");
         playerColor = changePlayer(playerColor);
       }
     }
