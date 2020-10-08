@@ -1,8 +1,10 @@
 var gulp = require('gulp');
+var webserver = require('gulp-webserver');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
 var sass = require('gulp-sass');
+var open = require('gulp-open');
 var paths = {
     pages: ['./public/*.html', './public/**/images/**']
 };
@@ -42,8 +44,11 @@ function watch() {
     gulp.watch('./src/**/*.ts', gulp.series(copyHTML, bundle));
     gulp.watch('./public/**/*.html', gulp.series(copyHTML, bundle));
     gulp.watch('./public/**/*.scss', style);
+    gulp.src('./dist').pipe(webserver({
+        livereload:true
+    }));
+    gulp.src('./dist/index.html').pipe(open());
 }
-
 
 exports.copyImages = copyImages;
 exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
