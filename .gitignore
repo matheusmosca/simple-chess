@@ -2,3 +2,6 @@
 /.vscode
 /node_modules
 /css/main.css.map
+
+# macOS
+.DS_STORE

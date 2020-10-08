@@ -5,8 +5,17 @@ import { isInCheck } from "./check";
 
 export let playerColor: Color = 'white'; 
 let hasClickedAPiece = false;
-// this will be a reference to the 
+
+// a reference to the currently selected div
 let selectedElement: null | HTMLDivElement = null;
+
+// an array of divs that are a part of all possible moves
+// relative to the selectedElement. I am choosing to store this
+// rather than dynamically create and destroy the array each selection to 
+// save on computations that would otherwise stem from calculating possible moves twice: 
+// once for creation, once for deletion
+let hightlightedElements: HTMLElement[] = [];
+
 let firstPieceDTO: IPieceDTO;
 let secondPieceDTO: IPieceDTO;
 
@@ -19,25 +28,75 @@ export function findPiecePosition(target: HTMLDivElement): IPieceDTO {
   return { coord, pieceInstance };
 }
 
+function highlightPossibleMoves(target: EventTarget) {
+  if (!selectedElement) return;
+
+  // const possibleMoves = 
+  const pieceDTO = findPiecePosition((target as HTMLDivElement));
+
+  const possibleMoves = pieceDTO.pieceInstance.possibleMovementsList(boardMatrix)
+
+  const boardElement = (target as HTMLDivElement).parentElement;
+
+  // these are the actual divs in browser
+  const piecesElements = Array.from(boardElement.children, (child) => child as HTMLDivElement);
+
+  // filter the piecesElements array to only the elements that have the same 
+  // row and column attributes of each possible move coordinate
+  const possibleMovesElements = piecesElements.filter(element => {
+    return possibleMoves.some((coord) => {
+      return coord.row === parseInt(element.getAttribute("row"), 10) &&
+      coord.column === parseInt(element.getAttribute("column"), 10)
+    });
+  })
+
+  // append a marker to each possible move
+  // TODO: distinguish between locations with piece and empty locations
+  possibleMovesElements.forEach(element => {
+    const marker = document.createElement('div');
+    marker.className = "moveable";
+    element.appendChild(marker)
+  })
+
+  hightlightedElements = possibleMovesElements;
+}
+
+function clearHighlightedMoves() {
+  if (hightlightedElements.length === 0) {
+    return;
+  }
+
+  hightlightedElements.forEach(element => {
+    // there should not be more than firstChild since I manually appended the
+    // additional child
+    element.removeChild(element.firstChild)
+  })
+
+  // reset the array
+  hightlightedElements = []
+}
+
 export function firstClick(target: EventTarget): boolean {
   if (!hasClickedAPiece) {
     const { coord, pieceInstance } = findPiecePosition((target as HTMLDivElement));
     firstPieceDTO = { coord, pieceInstance };
-    // console.log(isInCheck(coord, playerColor));
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
-      console.log(pieceInstance.color);
+      // console.log(pieceInstance.color);
+
       selectedElement = target as HTMLDivElement;
+      highlightPossibleMoves(target)
       selectedElement.classList.toggle("selected")
-      // (target as HTMLDivElement).classList.toggle("selected")
-      console.log(selectedElement)
+
       return true
     }
   }
   
   else {
+    // if there is a selectedElement, then the class "selected" was added
+    // and therefore should be removed
     selectedElement?.classList.remove("selected")
-
+    clearHighlightedMoves()
 
     return false
   }
