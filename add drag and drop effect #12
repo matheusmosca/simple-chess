@@ -1,0 +1,76 @@
+//In order to support this make existing square (html template) add CSS class “droppable-square”, which will be used later to make square droppable. And add CSS class “draggable-piece” to make chess piece draggable.
+
+<div "ngFor="let files of Board.Files, let i = index "> 
+  <div class="board-square droppable-square" ngFor="let rank of Board.Ranks, let j = index" 
+   [style.background]="Board.Squares[7-i][j].Iswhite ? '#FECE9E' : '#D18B46'"> 
+   <span class="square-name">{{Board.Squares[7-i][j].SquareId}}</span> 
+   <div "ngIf="Board.Squares[7-i][j].Piece" class="piece draggable-piece" style="background-image: url "Ekdivip" 
+   </div>
+
+// As shown in following code base it makes above CSS classes draggable & droppable, and places restrictions on only allowing piece to be dropped on square and not outside of square. There is few additional logic to show boarder during drag-drop process on which pieces hover over.
+
+
+piecemover.ts app\board\component 
+import { Injectable } from '@angular/core'; 
+import { Board, BoardBuilder } from '../model/board' 
+@Injectable() 
+export class PieceMover {
+
+      MakePiecesMovable(board : Board) { 
+          setTimeout(() => {
+            $('.draggable-piece').draggable({ cursor: "move", revert: "invalid")); 
+              $('.droppable-square').droppable( 
+                { 
+                  accept: function(dropPiece) { 
+                    var isPiece = $(dropPiece).hasClass("draggable-piece"); 
+                    //todo: check other business logic if piece is allowed to be dropped here.... 
+                    return isPiece; 
+                    }, 
+                    drop: function(event, ui) { 
+                    $(this).removeClass("border").removeClass("over"); 
+                    var dropped = ui.draggable; 
+                    var droppedOn = $(this); 
+                    $(dropped).detach().css({top: 10,1eft: 10}).appendTo(dropped0n); 
+                    } , 
+                 over: function(event, elem) { 
+                 $(this).addClass("over"); 
+                 },
+                 out: function(event, elem) { 
+                 $(this).removeClass("over"); 
+                 } 
+                }); 
+              }, 0); 
+            } 
+          }
+
+//The constructor takes parameter of type PieceMover which will be injected/resolved by DI. After resolving dependencies as mentioned above, after showing board BoardComponent calls method MakePiecesMovable() method, which makes pieces move onto chess squares.
+
+
+board.component.ts
+app\board\component 
+import { Component, OnInit } from l@angular/core'; 
+import { Board, BoardBuilder } from '../model/board' 
+import { PieceMover } from '../component/piecemover'; 
+
+@Component({ 
+selector: 'chess-board', 
+templateUrl: './app/board/component/board.component.html',
+styleUrls: ['./app/board/co ponent/board.component.css'], 
+providers: [PieceMover]
+}) 
+export class BoardComponent implements OnInit { 
+constructor(private _pieceMover : PieceMover) {} 
+
+Board: Board; 
+
+ngOnInit() { 
+this.Board = BoardBuilder.BuildBoard("NewGame"); 
+this._pieceMover.MakePiecesMovable(this.Board); 
+} 
+LoadPosition(positionName : string) {
+this.Board = BoardBuilder.BuildBoard(positionName);
+this._pieceMover.MakePiecesMovable(this.Board); 
+} 
+
+//That brings to the point where V# 0.3 is functional and now the chess board loads all chess pieces on board, and allows to move pieces on squares. Hurray!!!
+          
