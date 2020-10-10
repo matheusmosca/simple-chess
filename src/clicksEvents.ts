@@ -28,14 +28,17 @@ export function findPiecePosition(target: HTMLDivElement): IPieceDTO {
   return { coord, pieceInstance };
 }
 
+// this function will grab the div elements of all the
+// possible moves for the selected piece, append a child and toggle specific 
+// classes in order to visually indicate the available moves. 
 function highlightPossibleMoves(target: EventTarget) {
   if (!selectedElement) return;
 
-  // const possibleMoves = 
   const pieceDTO = findPiecePosition((target as HTMLDivElement));
 
   const possibleMoves = pieceDTO.pieceInstance.possibleMovementsList(boardMatrix);
 
+  // I needed to grab the parent board div so I would be able to loop through the board
   const boardElement = (target as HTMLDivElement).parentElement;
 
   // these are the actual divs in browser
