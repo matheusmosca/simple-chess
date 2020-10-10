@@ -2,6 +2,7 @@ import { boardMatrix, renderBoard } from './board';
 import { Piece, Color } from './pieces/piece';
 import { firstClick, secondClick } from "./clicksEvents";
 
+
 export const board = document.querySelector('.board');
 
 export interface ICoordinate {
@@ -26,12 +27,14 @@ export function tryMovement({ pieceInstance }: IPieceDTO, { coord }: IPieceDTO, 
   });
   
   let checkEspecialMovements = especialMovements(pieceInstance, coord);
-
   if (!checkEspecialMovements && !!check) {
     if (pieceInstance.constructor["name"].toLowerCase() === 'pawn') {
       console.log(pieceInstance.doubleMovementTurn);
       if (Math.abs(coord.row - pieceInstance.row) === 2) {
         pieceInstance.doubleMovementTurn = Piece.turn;
+      }
+      if(coord.row == 0 || coord.row == 7){
+        pieceInstance.promote = true;
       }
     }
     pieceInstance.doMovement(coord, boardMatrix);

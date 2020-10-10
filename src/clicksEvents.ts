@@ -3,6 +3,7 @@ import { Color } from './pieces/piece';
 import { boardMatrix } from "./board";
 import { isInCheck } from "./check";
 
+
 export let playerColor: Color = 'white'; 
 let hasClickedAPiece = false;
 
@@ -115,9 +116,9 @@ export function secondClick(target: EventTarget) {
       hasClickedAPiece = false;
       firstClick(target);
     } else {
-      const sucess = tryMovement(firstPieceDTO, secondPieceDTO, playerColor);
+      const success = tryMovement(firstPieceDTO, secondPieceDTO, playerColor);
       hasClickedAPiece = false;
-      if (sucess) {
+      if (success) {
         playerColor = changePlayer(playerColor);
       }
     }
