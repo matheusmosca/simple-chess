@@ -34,7 +34,7 @@ function highlightPossibleMoves(target: EventTarget) {
   // const possibleMoves = 
   const pieceDTO = findPiecePosition((target as HTMLDivElement));
 
-  const possibleMoves = pieceDTO.pieceInstance.possibleMovementsList(boardMatrix)
+  const possibleMoves = pieceDTO.pieceInstance.possibleMovementsList(boardMatrix);
 
   const boardElement = (target as HTMLDivElement).parentElement;
 
@@ -50,17 +50,20 @@ function highlightPossibleMoves(target: EventTarget) {
     });
   })
 
-  // append a marker to each possible move
-  // TODO: distinguish between locations with piece and empty locations
+  // append a marker to each possible move, the marker is either
+  // movealble (a blank space) or targetable (a space containing a piece)
   possibleMovesElements.forEach(element => {
     const marker = document.createElement('div');
-    marker.className = "moveable";
-    element.appendChild(marker)
+    // if the position has a piece, marker is targetable
+    marker.className = findPiecePosition(element).pieceInstance ? "targetable" : "moveable";
+    element.appendChild(marker);
   })
 
   hightlightedElements = possibleMovesElements;
 }
 
+// this function will get called each time a new piece is selected, 
+// as well as after each move made
 function clearHighlightedMoves() {
   if (hightlightedElements.length === 0) {
     return;
@@ -68,12 +71,12 @@ function clearHighlightedMoves() {
 
   hightlightedElements.forEach(element => {
     // there should not be more than firstChild since I manually appended the
-    // additional child
-    element.removeChild(element.firstChild)
+    // additional child (see function highlightPossibleMoves)
+    element.removeChild(element.firstChild);
   })
 
   // reset the array
-  hightlightedElements = []
+  hightlightedElements = [];
 }
 
 export function firstClick(target: EventTarget): boolean {
@@ -82,11 +85,10 @@ export function firstClick(target: EventTarget): boolean {
     firstPieceDTO = { coord, pieceInstance };
     if (pieceInstance && pieceInstance.color === playerColor) {
       hasClickedAPiece = true
-      // console.log(pieceInstance.color);
 
       selectedElement = target as HTMLDivElement;
-      highlightPossibleMoves(target)
-      selectedElement.classList.toggle("selected")
+      highlightPossibleMoves(target);
+      selectedElement.classList.toggle("selected");
 
       return true
     }
