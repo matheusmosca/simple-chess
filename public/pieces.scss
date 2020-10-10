@@ -1,70 +1,71 @@
 .pawn.white {
-    background-image: url('./images/wP.svg');
-    background-size: cover;
+  background-image: url("./images/wP.svg");
+  background-size: cover;
 }
 
 .pawn.black {
-    background-image: url('./images/bP.svg');
-    background-size: cover;
+  background-image: url("./images/bP.svg");
+  background-size: cover;
 }
 
 .rook.white {
-    background-image: url('./images/wR.svg');
-    background-size: cover;
+  background-image: url("./images/wR.svg");
+  background-size: cover;
 }
 
 .rook.black {
-    background-image: url('./images/bR.svg');
-    background-size: cover;
+  background-image: url("./images/bR.svg");
+  background-size: cover;
 }
 
 .bishop.white {
-    background-image: url('./images/wB.svg');
-    background-size: cover;
+  background-image: url("./images/wB.svg");
+  background-size: cover;
 }
 
 .bishop.black {
-    background-image: url('./images/bB.svg');
-    background-size: cover;
+  background-image: url("./images/bB.svg");
+  background-size: cover;
+  z-index: 20;
 }
 
 .knight.white {
-    background-image: url('./images/wN.svg');
-    background-size: cover;
+  background-image: url("./images/wN.svg");
+  background-size: cover;
 }
 
 .knight.black {
-    background-image: url('./images/bN.svg');
-    background-size: cover;
+  background-image: url("./images/bN.svg");
+  background-size: cover;
 }
 
 .queen.white {
-    background-image: url('./images/wQ.svg');
-    background-size: cover;
+  background-image: url("./images/wQ.svg");
+  background-size: cover;
 }
 
 .queen.black {
-    background-image: url('./images/bQ.svg');
-    background-size: cover;
+  background-image: url("./images/bQ.svg");
+  background-size: cover;
 }
 
 .king.white {
-    background-image: url('./images/wK.svg');
-    background-size: cover;
+  background-image: url("./images/wK.svg");
+  background-size: cover;
 }
 
 .king.black {
-    background-image: url('./images/bK.svg');
-    background-size: cover;
+  background-image: url("./images/bK.svg");
+  background-size: cover;
 }
 
 .white {
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }
 .black {
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }

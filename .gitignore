@@ -1,5 +1,10 @@
 /dist
-/.vscode
 /node_modules
 /css/main.css.map
+
+# editor environments
 .idea
+/.vscode
+
+# macOS
+.DS_STORE

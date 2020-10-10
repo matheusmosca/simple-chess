@@ -1,7 +1,18 @@
-* , *::after, *::before{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 body {
@@ -12,7 +23,7 @@ body {
   height: 100vh;
 
   .board {
-    background-image: url('./images/wood4.jpg');
+    background-image: url("./images/wood4.jpg");
     background-size: cover;
     display: grid;
     justify-content: center;
@@ -20,14 +31,56 @@ body {
     grid-template-columns: repeat(8, 1fr);
 
     div {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0;
       width: 100%;
       height: 100%;
-    }
-    
-  }
 
+      .moveable {
+        position: absolute;
+        background-color:rgba(0, 128, 0, 0.9);
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+
+        animation: fade 200ms ease-in-out;
+
+        // this has to be here so that clicking the child div
+        // does not interfere with the intended behavior (i.e.
+        // clicking the piece)
+        pointer-events: none;
+      }
+
+      .targetable {
+        width: 100%;
+        height: 100%;
+  
+        background: linear-gradient(to right,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 0 0,
+          linear-gradient(to right,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 0 100%,
+          linear-gradient(to left,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 100% 0,
+          linear-gradient(to left,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 100% 100%,
+          linear-gradient(to bottom,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 0 0,
+          linear-gradient(to bottom,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 100% 0,
+          linear-gradient(to top,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 0 100%,
+          linear-gradient(to top,rgba(44, 155, 44, 0.9), 3px, transparent 3px) 100% 100%;
+  
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+
+        // this has to be here so that clicking the child div
+        // does not interfere with the intended behavior (i.e.
+        // clicking the piece)
+        pointer-events: none;
+      }
+
+
+    }
+
+    .selected {
+      background-color: rgba(44, 155, 44, 0.5);
+    }
+  }
 }
