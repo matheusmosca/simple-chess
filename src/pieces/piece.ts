@@ -2,6 +2,7 @@ import { ICoordinate, board, findKingCoord } from '../game';
 import { renderBoard } from '../board';
 import { isInCheck } from '../check';
 
+
 export type Color = 'white' | 'black'
 
 export interface IPiece {
@@ -9,11 +10,13 @@ export interface IPiece {
     column: number
     color: Color
     Moved: boolean
+    promote: boolean
     doubleMovementTurn: number
 }
 
 export abstract class Piece implements IPiece {
     public Moved: boolean;
+    public promote: boolean;
     static turn: number = 1; 
     public doubleMovementTurn: number = -1;    
 
@@ -23,6 +26,7 @@ export abstract class Piece implements IPiece {
         this.column = column;
         this.color = color;
         this.Moved = false;
+        this.promote = false;
     }
 
     possibleMovementsList(board: Piece[][]): ICoordinate[] {
@@ -30,10 +34,11 @@ export abstract class Piece implements IPiece {
     }
 
     doMovement({ row, column }: ICoordinate, matrix: Piece[][]) {
+
         matrix[this.row][this.column] = null;
         this.Moved = true;
         this.row = row;
-        this.column = column
+        this.column = column;
 
         matrix[row][column] = null;
         renderBoard(matrix, board);
