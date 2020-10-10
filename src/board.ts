@@ -46,6 +46,9 @@ function renderBoard(boardMatrix: Piece[][], board: Element): void {
     for (let i = 7; i >= 0; i--) {
         for (let j = 0; j< 8; j++) {
             if (boardMatrix[i][j] !== undefined && boardMatrix[i][j] !== null) {
+                if (boardMatrix[i][j].promote){
+                    boardMatrix[i][j] = new Queen(i,j,boardMatrix[i][j].color);
+                }
                 // Pick what is the piece
                 const piece = boardMatrix[i][j].constructor["name"].toLowerCase();
                 const { color } = boardMatrix[i][j];
