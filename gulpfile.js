@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var webserver = require('gulp-webserver');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
@@ -44,9 +45,15 @@ function watch() {
     gulp.watch('./public/**/*.scss', style);
 }
 
+function liveReload() {
+    gulp.src('dist/').pipe(webserver({
+        livereload: true,
+        open: 'index.html'
+    }));
+}
 
-exports.copyImages = copyImages;
+const wt = () => watch();
+const live = () => liveReload();
+
 exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
-exports.copyHTML = copyHTML;
-exports.style = style;
-exports.watch = gulp.series(copyHTML, style, bundle, copyImages, watch);
+exports.watch = gulp.series(copyHTML, style, bundle, copyImages, gulp.parallel(wt, live));
