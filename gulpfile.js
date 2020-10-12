@@ -44,14 +44,19 @@ function watch() {
     gulp.watch('./src/**/*.ts', gulp.series(copyHTML, bundle));
     gulp.watch('./public/**/*.html', gulp.series(copyHTML, bundle));
     gulp.watch('./public/**/*.scss', style);
-    gulp.src('./dist').pipe(webserver({
-        livereload:true
-    }));
-    gulp.src('./dist/index.html').pipe(open());
 }
 
+function liveReload() {
+    gulp.src('dist/').pipe(webserver({
+        livereload: true,
+        open: 'index.html'
+    }));
+}
+
+const wt = () => watch();
+const live = () => liveReload();
 exports.copyImages = copyImages;
 exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
 exports.copyHTML = copyHTML;
 exports.style = style;
-exports.watch = gulp.series(copyHTML, style, bundle, copyImages, watch);
+exports.watch = gulp.series(copyHTML, style, bundle, copyImages, gulp.parallel(wt, live));
