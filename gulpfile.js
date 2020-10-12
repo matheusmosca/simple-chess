@@ -4,7 +4,6 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
 var sass = require('gulp-sass');
-var open = require('gulp-open');
 var paths = {
     pages: ['./public/*.html', './public/**/images/**']
 };
