@@ -54,4 +54,6 @@ function liveReload() {
 
 const wt = () => watch();
 const live = () => liveReload();
+
+exports.bundle = gulp.parallel(bundle, copyHTML, style, copyImages);
 exports.watch = gulp.series(copyHTML, style, bundle, copyImages, gulp.parallel(wt, live));
