@@ -55,8 +55,6 @@ npm i gulp-cli -g
 gulp watch
 ```
 
-Now, go to dist/index.html and open it on your browser
-
 ## License
 
 Licensed under the MIT license.
