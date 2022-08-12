@@ -18,8 +18,8 @@ export class Pawn extends Piece implements IPiece {
             if (!this.Moved) {
                 
                 if (this.row + 2*mov < 8 && this.row + 2*mov >= 0) {
-                    
-                    if (board[this.row + 2*mov][this.column] === null) {
+                    // add two move forward if no pieces infront
+                    if (board[this.row + 2*mov][this.column] === null && board[this.row + mov][this.column] === null) {
                         listOfCoordinates.push({ row: this.row + 2*mov, column: this.column })
                     }
                 }
